@@ -4,12 +4,13 @@ const modules = BABEL_ENV === 'cjs' || NODE_ENV === 'test' ? 'commonjs' : false;
 const loose = true;
 
 module.exports = {
-  presets: [['env', { loose, modules }], 'react'],
+  presets: [['@babel/env', { loose, modules }], '@babel/flow', '@babel/react'],
   plugins: [
     'preval',
     ['transform-react-remove-prop-types', { mode: 'unsafe-wrap' }],
-    'transform-object-rest-spread',
-    ['transform-class-properties', { loose }],
+    '@babel/plugin-transform-flow-strip-types',
+    '@babel/plugin-proposal-object-rest-spread',
+    ['@babel/plugin-proposal-class-properties', { loose }],
     modules === 'commonjs' && 'add-module-exports',
   ].filter(Boolean),
 };
